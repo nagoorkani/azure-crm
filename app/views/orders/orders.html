@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Orders Management</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>Order history</strong>
+            <div class="btn-group pull-right">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                Filter history <i class="fa fa-filter"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="#">Active orders</a></li>
+                  <li><a href="#">Pending orders</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="panel panel-default" ng-repeat="order in orders.orders">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <span>Order Date</spna>
+                    <p>{{order.order_date}}</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <span>Total</spna>
+                    <p>{{order.total}}</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <span>Ship To</spna>
+                    <p>{{order.account_id}}</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <span>Order #: {{order.order_id}}</spna>
+                    <p><a href="#/dashboard/order/{{order.order_id}}/invoice">Invoice</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="media order-item" ng-repeat="item in order.items">
+                  <div class="media-left">
+                    <a href="#">
+                      <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="media-object">
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">{{item.name}}</h4>
+                    <span class="pull-right label" ng-class="item.fulfillment_date === '' ? 'label-warning' : 'label-success'">{{orders.orderStatus(item.fulfillment_date)}}</span>
+                    <span class="text-muted small">quantity: <em>{{item.qty}}</em></span><br/>
+                    <span class="text-muted small">cost: <em>{{item.cost}}</em></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.panel-body -->
+      </div>
+      <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-6 -->
+</div>

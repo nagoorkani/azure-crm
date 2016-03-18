@@ -1,0 +1,224 @@
+{
+  "account": [
+    {
+      "id": 1,
+      "name": "",
+      "title": "",
+      "address": {
+        "street": "",
+        "landmark": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": "",
+        "geoLocation": []
+      },
+      "phone": {
+        "mobile": [
+          "123",
+          "567"
+        ],
+        "office": [
+          "123",
+          "567"
+        ],
+        "home": [
+          "123",
+          "567"
+        ]
+      },
+      "email": [],
+      "url": "",
+      "image": "",
+      "bankDetails": [],
+      "subsidiary": [
+        3
+      ],
+      "contacts": {}
+    },
+    {
+      "id": 2,
+      "name": "",
+      "title": "",
+      "address": {
+        "primary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        },
+        "secondary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        }
+      },
+      "phone": {
+        "mobile": [
+          "123",
+          "567"
+        ],
+        "office": [
+          "123",
+          "567"
+        ],
+        "home": [
+          "123",
+          "567"
+        ]
+      },
+      "email": [],
+      "url": "",
+      "image": "",
+      "banking": [],
+      "subsidiary": []
+    },
+    {
+      "id": 3,
+      "name": "",
+      "title": "",
+      "address": {
+        "primary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        },
+        "secondary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        }
+      },
+      "phone": {
+        "mobile": [
+          "123",
+          "567"
+        ],
+        "office": [
+          "123",
+          "567"
+        ],
+        "home": [
+          "123",
+          "567"
+        ]
+      },
+      "email": [],
+      "url": "",
+      "image": "",
+      "banking": [],
+      "subsidiary": [
+        3
+      ]
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "name": "",
+      "surname": "",
+      "title": "",
+      "address": {
+        "primary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        },
+        "secondary": {
+          "street": "",
+          "landmark": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "geoLocation": []
+        }
+      },
+      "phone": {
+        "mobile": [
+          "123",
+          "567"
+        ],
+        "office": [
+          "123",
+          "567"
+        ],
+        "home": [
+          "123",
+          "567"
+        ]
+      },
+      "email": [],
+      "url": "",
+      "company": [
+        {
+          "name": "",
+          "description": "",
+          "businessType": "",
+          "address": {
+            "street": "",
+            "landmark": "",
+            "city": "",
+            "state": "",
+            "zip": "",
+            "country": "",
+            "geoLocation": []
+          },
+          "employees": []
+        }
+      ],
+      "image": ""
+    }
+  ],
+  "orders": [
+    {
+      "oder_id": 1,
+      "order_date": "10/10/10",
+      "fulfill_date": "20/10/10",
+      "items": [],
+      "order_total": "",
+      "payment": ""
+    }
+  ],
+  "products": [
+    {
+      "product_id": "123-ABC",
+      "name": "ABC",
+      "desc": "",
+      "qty": 94,
+      "price": {
+        "price1": 0,
+        "price2": 0,
+        "price3": 0
+      },
+      "category_ids": [],
+      "image": ""
+    }
+  ],
+  "categories": [
+    {
+      "name": "",
+      "title": "",
+      "subTitle": ""
+    }
+  ]
+}

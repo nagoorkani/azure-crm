@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="clearfix">
+    <ul class="nav nav-pills pull-right">
+      <li ng-class="{'active':sales.mode==1}" title="list"><a ng-click="sales.mode=1"><i class="fa fa-list"></i></a></li>
+      <li ng-class="{'active':sales.mode==2}" title="thumbs"><a ng-click="sales.mode=2"><i class="fa fa-th"></i></a></li>
+      <!-- <li ng-class="{'active':sales.mode==3}" title="big thumbs"><a ng-click="sales.mode=3"><i class="fa fa-th-large fa-4x"></i></a></li> -->
+    </ul>
+  </div>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div ng-repeat-start="item in sales.items" ng-class="{'col-xs-4':sales.mode==1, 'col-xs-3':sales.mode==2, 'col-xs-6':sales.mode==3}">
+        <div class="well">
+          <a href="" ng-click="showUserModal($index)"><img ng-src="{{item.image}}" class="img-responsive" style="width: 120px; height: 120px;"></a>
+        </div>
+      </div>
+      <div ng-class="{'col-xs-8':sales.mode==1}" ng-hide="sales.mode==2">
+        <h2 class="cap">{{item.name}}</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>{{item.description}}</p>
+                <span>in-stock: {{item.qty}}</span><br/>
+                <span>price: {{item.cost}}</span>
+            </div>
+          	<div class="col-sm-6 text-right">
+              <div class="hidden-xs">
+                <a href="">Add</a><br>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div ng-repeat-end="" ng-class="{'clearfix':sales.mode==1}"></div>
+
+    </div><!--/row-->
+    <hr>
+  </div><!--/container-->
+</div><!--/container-->
