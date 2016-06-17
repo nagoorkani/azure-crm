@@ -12,7 +12,5 @@ angular.module('sbAdminApp')
         templateUrl:'scripts/directives/chat/chat.html',
         restrict: 'E',
         replace: true,
-    	}
+    	};
 	});
-
-

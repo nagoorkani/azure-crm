@@ -22,9 +22,9 @@ angular
     });
 
     $urlRouterProvider
-    // .when('/accounts/:id', function(){
-    //   console.log('accounts/id');
-    // })
+    .when('/accounts/:id', function(){
+      console.log('accounts/id');
+    })
       .otherwise('/dashboard/home');
 
     $stateProvider
@@ -198,6 +198,34 @@ angular
           }
         },
         controllerAs: 'sales'
+      })
+      .state('dashboard.store', {
+        url: '/store',
+        controller: 'StoreController',
+        templateUrl: 'views/store/store.html',
+        resolve: {
+          loadMyFiles: function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: ['scripts/controllers/store.controller.js', 'scripts/services/storedata.service.js']
+            });
+          }
+        },
+        controllerAs: 'store'
+      })
+      .state('dashboard.cart', {
+        url: '/cart',
+        controller: 'StoreController',
+        templateUrl: 'views/store/cart.html',
+        resolve: {
+          loadMyFiles: function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: ['scripts/controllers/store.controller.js', 'scripts/services/storedata.service.js']
+            });
+          }
+        },
+        controllerAs: 'store'
       })
       .state('dashboard.invoice', {
         url: '/order/:id/invoice',
