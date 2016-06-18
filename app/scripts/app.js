@@ -21,34 +21,35 @@ angular
       events: true,
     });
 
-    $urlRouterProvider
-    .when('/accounts/:id', function(){
+    $urlRouterProvider.when('/accounts/:id', function(){
       console.log('accounts/id');
-    })
-      .otherwise('/dashboard/home');
+    }).otherwise('/dashboard/home');
 
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
+        controller: 'NavController',
         templateUrl: 'views/dashboard/main.html',
         resolve: {
           loadMyDirectives: function($ocLazyLoad) {
             return $ocLazyLoad.load({
                 name: 'sbAdminApp',
                 files: [
+                  'scripts/services/auth.factory.js',
+                  'scripts/controllers/nav.controller.js',
                   'scripts/directives/header/header.js',
                   'scripts/directives/header/header-notification/header-notification.js',
                   'scripts/directives/sidebar/sidebar.js',
                   'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
                 ]
               }),
-              $ocLazyLoad.load({
+            $ocLazyLoad.load({
                 name: 'toggle-switch',
                 files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
                   "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                 ]
               }),
-              $ocLazyLoad.load({
+            $ocLazyLoad.load({
                 name: 'ngAnimate',
                 files: ['bower_components/angular-animate/angular-animate.js']
               })
@@ -69,12 +70,18 @@ angular
               files: ['bower_components/angular-touch/angular-touch.js']
             })
           }
-        }
+        },
+        controllerAs: 'nav'
       })
       .state('dashboard.home', {
         url: '/home',
         controller: 'MainCtrl',
         templateUrl: 'views/dashboard/home.html',
+        // onEnter: ['$state', 'AuthService', function($state, auth){
+        //   if(!auth.isLoggedIn()){
+        //     $state.go('login');
+        //   }
+        // }],
         resolve: {
           loadMyFiles: function($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -91,30 +98,30 @@ angular
         },
         controllerAs: 'main'
       })
-      //   .state('dashboard.ihome',{
-      //     url:'/ihome',
-      //     controller: 'DashboardController',
-      //     templateUrl:'views/dashboard/dashboard.html',
-      //     resolve: {
-      //       loadMyFiles:function($ocLazyLoad) {
-      //         return $ocLazyLoad.load({
-      //           name:'sbAdminApp',
-      //           files:[
-      //           'scripts/controllers/dashboard.contorller.js',
-      //           'scripts/directives/timeline/timeline.js',
-      //           'scripts/directives/notifications/notifications.js',
-      //           'scripts/directives/chat/chat.js',
-      //           'scripts/directives/dashboard/badges/badges.js'
-      //           ]
-      //         });
-      //       }
-      //     },
-      //     controllerAs: 'dashboard'
-      //   })
-      //   .state('dashboard.form',{
-      //     templateUrl:'views/form.html',
-      //     url:'/form'
-      // })
+      .state('dashboard.ihome',{
+          url:'/ihome',
+          controller: 'DashboardController',
+          templateUrl:'views/dashboard/dashboard.html',
+          resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+              return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:[
+                'scripts/controllers/dashboard.contorller.js',
+                'scripts/directives/timeline/timeline.js',
+                'scripts/directives/notifications/notifications.js',
+                'scripts/directives/chat/chat.js',
+                'scripts/directives/dashboard/badges/badges.js'
+                ]
+              });
+            }
+          },
+          controllerAs: 'dashboard'
+        })
+      .state('dashboard.form',{
+          templateUrl:'views/form.html',
+          url:'/form'
+      })
       .state('dashboard.accounts', {
         url: '/accounts',
         controller: 'AccountsController',
@@ -247,7 +254,22 @@ angular
       })
       .state('login', {
         templateUrl: 'views/pages/login.html',
-        url: '/login'
+        url: '/login',
+        controller: 'AuthController',
+        // onEnter: ['$state', 'AuthService', function($state, auth){
+        //   if(auth.isLoggedIn()){
+        //     $state.go('dashboard.home');
+        //   }
+        // }],
+        resolve: {
+          loadMyFiles: function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: ['scripts/controllers/auth.controller.js', 'scripts/services/auth.factory.js']
+            });
+          }
+        },
+        controllerAs: 'auth'
       })
       .state('dashboard.chart', {
         templateUrl: 'views/chart.html',
@@ -297,4 +319,15 @@ angular
         templateUrl: 'views/ui-elements/grid.html',
         url: '/grid'
       })
-  }]);
+  }])
+  .run(function ($rootScope, $state, AuthService) {
+    $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+    if (!AuthService.isLoggedIn()) {
+      console.log(next.name);
+      if (next.name !== 'login' && next.name !== 'register') {
+        event.preventDefault();
+        $state.go('login');
+      }
+    }
+  });
+});
