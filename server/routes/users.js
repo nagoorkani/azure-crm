@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var passport = require('passport');
 var jwt = require('express-jwt');
 var config = require('../config/main');
 
@@ -11,7 +12,7 @@ var auth = jwt({
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
   User.find({}, function (err, messages) {
     if (err) res.send(err);
 
@@ -19,7 +20,7 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/:user', function(req, res, next) {
+router.get('/:user', auth, function(req, res, next) {
   User.find({username: req.params.user}, function (err, messages) {
     if (err) res.send(err);
 
