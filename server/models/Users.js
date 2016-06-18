@@ -9,7 +9,12 @@ var UserSchema = new mongoose.Schema({
     unique: true
   },
   hash: String,
-  salt: String
+  salt: String,
+  role: {
+    type: String,
+    enum: ['sales', 'manager', 'admin', 'client'],
+    default: 'sales'
+  }
 });
 
 UserSchema.methods.setPassword = function(password) {

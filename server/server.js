@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var config = require('./config/main');
 
 require('./models/Users');
 require('./config/passport');
@@ -26,7 +27,7 @@ app.all('/*', function(req, res, next) {
 app.use(passport.initialize());
 
 // mongodb connection string
-mongoose.connect('mongodb://localhost/azure-crm');
+mongoose.connect(config.database);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

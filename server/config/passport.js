@@ -14,12 +14,12 @@ passport.use(new LocalStrategy(
       }
       if (!user) {
         return done(null, false, {
-          message: 'Incorrect username.'
+          message: 'Authentication failed. User not found.'
         });
       }
       if (!user.validPassword(password)) {
         return done(null, false, {
-          message: 'Incorrect password.'
+          message: 'Authentication failed. Password did not match.'
         });
       }
       return done(null, user);
