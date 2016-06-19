@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Account = mongoose.model('Account');
 var passport = require('passport');
 var jwt = require('express-jwt');
 

@@ -9,6 +9,7 @@ var passport = require('passport');
 var config = require('./config/main');
 
 require('./models/Users');
+require('./models/Accounts');
 require('./config/passport');
 
 // route config

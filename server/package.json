@@ -12,6 +12,7 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "express-jwt": "^3.4.0",
+    "json-schema-to-mongoose": "^0.2.2",
     "jsonwebtoken": "^7.0.1",
     "mongoose": "^4.5.0",
     "morgan": "~1.6.1",
