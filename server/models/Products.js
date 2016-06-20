@@ -2,10 +2,9 @@
  * Created by z062281 on 6/18/16.
  */
 var mongoose = require('mongoose');
-var category = require('./Category').Category;
+var category = require('./Category');
 
 var schema = new mongoose.Schema({
-    image: { data: Buffer, contentType: String },
     name: { type: String, trim: true, lowercase: true },
     description: { type: String, trim: true, lowercase: true },
     qty: { type: Number },
@@ -15,7 +14,8 @@ var schema = new mongoose.Schema({
         rrp: { type: Number }
     },
     currency: {type: String, default: 'INR'},
-    category: [{type: Schema.Types.ObjectId, ref: category}],
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: category}],
+    image: { data: Buffer, contentType: String },
     updated: { type: Date, default: Date.now }
 });
 

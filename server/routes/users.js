@@ -17,7 +17,7 @@ router.get('/', auth, function(req, res, next) {
     if (err) res.send(err);
 
     res.json(messages);
-  })
+  });
 });
 
 router.get('/:user', auth, function(req, res, next) {
@@ -25,7 +25,7 @@ router.get('/:user', auth, function(req, res, next) {
     if (err) res.send(err);
 
     res.json(messages);
-  })
+  });
 });
 
 module.exports = router;

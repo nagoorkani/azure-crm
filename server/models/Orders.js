@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
     orderDate: { type: Date },
     completed: { type: Boolean, default: false },
     amount: { type: Number },
-    accountId: { type: Schema.Types.ObjectId, ref: account},
+    accountId: { type: mongoose.Schema.Types.ObjectId, ref: account},
     products: [{
         productId: {type: String},
         name: {type: String},
