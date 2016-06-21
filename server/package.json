@@ -14,6 +14,7 @@
     "express-jwt": "^3.4.0",
     "json-schema-to-mongoose": "^0.2.2",
     "jsonwebtoken": "^7.0.1",
+    "lodash": "^4.13.1",
     "mongoose": "^4.5.0",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",

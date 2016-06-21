@@ -8,13 +8,16 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/main');
 
-require('./config/passport');
-
 require('./models/Users');
 require('./models/Accounts');
 require('./models/Products');
 require('./models/Category');
 require('./models/Orders');
+
+/*
+* passport for authentication. Must load USER model before.
+* */
+require('./config/passport');
 
 // route config
 var routes = require('./routes/index');
