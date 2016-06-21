@@ -6,6 +6,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 
+var _ = require('lodash');
+
 // -------------- GET all products --------------
 router.get('/', function(req, res) {
     Product.find({}, function (err, msg) {
@@ -26,16 +28,8 @@ router.get('/:id', function(req, res) {
 router.post('/', function (req, res) {
 
     var product = new Product;
-    //product.id           = req_body.id ;      // auto generated
-    product.name           = req.body.name;
-    product.description    = req.body.description;
-    product.qty            = req.body.qty;
-    product.prices.mrp     = req.body.prices.mrp;
-    product.prices.dlp     = req.body.prices.dlp;
-    product.prices.rrp     = req.body.prices.rrp;
-    product.currency       = req.body.currency;
-    product.category       = req.body.category;
-    product.image          = req.body.image;
+
+    _.extend(product, req.body);
 
     product.save(function (err, product) {
         if (err) {
@@ -51,15 +45,9 @@ router.put('/:id', function (req, res) {
     Product.findOne({ '_id': req.params.id}, function (err, product) {
         if (err) return res.send(err);
 
-        product.name           = req.body.name          || product.name ;
-        product.description    = req.body.description   || product.description ;
-        product.qty            = req.body.qty           || product.qty ;
-        product.prices.mrp     = req.body.prices.mrp    || product.prices.mrp ;
-        product.prices.dlp     = req.body.prices.dlp    || product.prices.dlp ;
-        product.prices.rrp     = req.body.prices.rrp    || product.prices.rrp ;
-        product.currency       = req.body.currency      || product.currency ;
-        product.category       = req.body.category      || product.category ;
-        product.image          = req.body.image         || product.image ;
+        if(!product) { return res.send(404); }
+
+        _.extend(product, req.body);
 
         product.save(function (err) {
             if (err) {

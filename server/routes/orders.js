@@ -29,24 +29,7 @@ router.post('/', function (req, res) {
 
     var order = new Order;
 
-    order.orderId      = req.body.orderId;
-    order.orderDate    = req.body.orderDate;
-    order.completed    = req.body.completed;
-    order.amount       = req.body.amount;
-    order.accountId    = req.body.accountId;
-
-    var productsColl = [];
-    req.body.products.forEach(function(product) {
-        productsColl.push({
-            productId: product.productId,
-            name: product.name,
-            qty: product.qty,
-            price: product.price,
-            discount: product.discount,
-            fulfillmentDate: product.fulfillmentDate
-        });
-    });
-    order.products = productsColl;
+    _.extend(order, req.body);
 
     order.save(function (err, msg){
         if (err) {
@@ -62,7 +45,6 @@ router.put('/:id', function (req, res) {
 
     Order.findOne({ '_id': req.params.id}, function (err, order) {
         if (err) return res.send(err);
-
         if(!order) { return res.send(404); }
 
         _.extend(order, req.body);

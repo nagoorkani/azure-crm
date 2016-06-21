@@ -6,6 +6,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 
+var _ = require('lodash');
+
 // -------------- GET all Categories --------------
 router.get('/', function(req, res) {
     Category.find({}, function (err, msg) {
@@ -26,12 +28,7 @@ router.get('/:id', function(req, res) {
 router.post('/', function (req, res) {
 
     var category = new Category;
-
-    category.categoryId = req.body.categoryId;
-    category.name       = req.body.name;
-    category.title      = req.body.title;
-    category.subTitle   = req.body.subTitle;
-    category.image      = req.body.image;
+    _.extend(category, req.body);
 
     category.save(function (err, category){
         if (err) {
@@ -46,12 +43,9 @@ router.post('/', function (req, res) {
 router.put('/:id', function (req, res) {
     Category.findOne({ '_id': req.params.id}, function (err, category) {
         if (err) return res.send(err);
+        if(!category) { return res.send(404); }
 
-        category.categoryId = req.body.categoryId || category.categoryId;
-        category.name       = req.body.name || category.name;
-        category.title      = req.body.title || category.title;
-        category.subTitle   = req.body.subTitle || category.subTitle;
-        category.image      = req.body.image || category.image;
+        _.extend(category, req.body);
 
         category.save(function (err) {
             if (err) {
